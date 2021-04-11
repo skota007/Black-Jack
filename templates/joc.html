@@ -1,0 +1,143 @@
+{%extends 'layout.html'%}
+{%block corp%}
+
+
+<script>
+    var scor_deal = 0;
+    var scor_play = 0;
+    document.addEventListener('DOMContentLoaded',()=>{
+     
+        carte1();
+        carte2();
+
+        
+            document.querySelector('#trage').onclick = ()=>{
+            carte2();
+         
+                    if(scor_play>21){
+                    verifica();
+                     }
+            }
+            document.querySelector('#retrage').onclick = (verifica);
+        
+        
+    });
+   
+   
+    function carte1(){
+        var nr = Math.floor(Math.random() * 12)+2; 
+        scor_deal+=nr;
+        
+        var elem = document.createElement("img");
+        elem.src = `static/carte-${nr}.png`; 
+        document.querySelector('#deal').appendChild(elem);
+    }
+
+  
+    function carte2(){
+        var nr = Math.floor(Math.random() * 12)+2; 
+        scor_play+=nr;
+        
+        var elem = document.createElement("img");
+       elem.src = `static/carte-${nr}.png`; 
+        document.querySelector('#play').appendChild(elem);
+    }
+    function verifica(){
+        carte1();
+        if(scor_play<22){
+         carte1();
+        }
+        if(scor_play>scor_deal && (scor_play<22|| scor_deal>21)){
+            document.querySelectorAll('button').forEach(button=>{
+                button.remove();
+            });
+            var h = document.createElement("p");
+            var j = document.createTextNode("playerul a castigat");
+            h.appendChild(j);
+
+            document.querySelector('#butoane').appendChild(h);
+            var but = document.createElement("button");
+            but.innerHTML = "reincearca";
+            document.querySelector('#butoane').appendChild(but);
+            but.onclick =function(){
+                location.reload();
+            }
+
+        }
+        if(scor_deal>scor_play && scor_deal<22){
+            document.querySelectorAll('button').forEach(button=>{
+                button.remove();
+            });
+            var h = document.createElement("p");
+            var j = document.createTextNode("dealerul a castigat");
+            h.appendChild(j);
+
+            document.querySelector('#butoane').appendChild(h);
+            var but = document. createElement("button");
+            but.innerHTML = "reincearca";
+            document.querySelector('#butoane').appendChild(but);
+            but.onclick =function(){
+                location.reload();
+            }
+        
+        }
+        if(scor_deal>21){
+            document.querySelectorAll('button').forEach(button=>{
+                button.remove();
+            });
+            var h = document.createElement("p");
+            var j = document.createTextNode("playerul  a castigat");
+            h.appendChild(j);
+
+            document.querySelector('#butoane').appendChild(h);
+            var but = document. createElement("button");
+            but.innerHTML = "reincearca";
+            document.querySelector('#butoane').appendChild(but);
+            but.onclick =function(){
+                location.reload();
+            }
+        }
+        if(scor_play>21){
+            document.querySelectorAll('button').forEach(button=>{
+                button.remove();
+            });
+            var h = document.createElement("p");
+            var j = document.createTextNode("dealerul a castigat");
+            h.appendChild(j);
+
+            document.querySelector('#butoane').appendChild(h);
+            var but = document. createElement("button");
+            but.innerHTML = "reincearca";
+            document.querySelector('#butoane').appendChild(but);
+            but.onclick =function(){
+                location.reload();
+            }
+        }
+        if(scor_deal===scor_play){
+            document.querySelectorAll('button').forEach(button=>{
+                button.remove();
+            });
+            var h = document.createElement("p");
+            var j = document.createTextNode("egalitate");
+            h.appendChild(j);
+
+            document.querySelector('#butoane').appendChild(h);
+            var but = document. createElement("button");
+            but.innerHTML = "reincearca";
+            document.querySelector('#butoane').appendChild(but);
+            but.onclick =function(){
+                location.reload();
+            }
+        }
+    }
+</script>
+<div id="sec">Dealer:
+    <div id="deal"> </div>
+    Player:
+    <div id="play"> </div>
+        <div id="butoane">
+        <button id= "trage">trage carte</button>
+        <button id="retrage">retrage</button>
+        </div>
+</div>
+{%endblock%}
