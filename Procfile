@@ -1,1 +1,1 @@
-web: gunicorn app:Black-Jack
+web: gunicorn app:app
