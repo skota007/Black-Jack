@@ -9,6 +9,6 @@ def index():
 @app.route("/doua")
 def joc():
     return render_template("joc.html")
-
+import app
 if __name__ == '__main__':
     app.run()
